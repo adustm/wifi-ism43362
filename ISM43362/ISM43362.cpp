@@ -19,7 +19,7 @@
 #include "mbed_debug.h"
 
 // activate / de-activate debug
-#define ism_debug 0
+#define ism_debug 1
 
 ISM43362::ISM43362(PinName mosi, PinName miso, PinName sclk, PinName nss, PinName resetpin, PinName datareadypin, PinName wakeup, bool debug)
     : _bufferspi(mosi, miso, sclk, nss, datareadypin),
@@ -602,7 +602,7 @@ int ISM43362::check_recv_status(int id, void *data)
 {
     int read_amount;
 
-    debug_if(_ism_debug, "ISM43362 check_recv_status: id %d\r\n", id);
+    //debug_if(_ism_debug, "ISM43362 check_recv_status: id %d\r\n", id);
 
     /* Activate the socket id in the wifi module */
     if ((id < 0) || (id > 3)) {
@@ -657,7 +657,9 @@ int ISM43362::check_recv_status(int id, void *data)
         return -1; /* nothing to read */
     }
 
-    debug_if(_ism_debug, "ISM43362 check_recv_status: id %d read_amount=%d\r\n", id, read_amount);
+    if (read_amount != 0) {
+        debug_if(_ism_debug, "ISM43362 check_recv_status: id %d read_amount=%d\r\n", id, read_amount);
+    }
     return read_amount;
 }
 

@@ -26,7 +26,7 @@
 #include "mbed_error.h"
 
 // change to true to add few SPI debug lines
-#define local_debug false
+#define local_debug true
 
 extern "C" int BufferedPrintfC(void *stream, int size, const char *format, va_list arg);
 
@@ -279,7 +279,9 @@ ssize_t BufferedSpi::read(uint32_t max)
         return -1;
     }
 
-    debug_if(local_debug, "SPI READ %d BYTES\r\n", len);
+    if (len != 0) {
+        debug_if(local_debug, "SPI READ %d BYTES\r\n", len);
+    }
 
     return len;
 }

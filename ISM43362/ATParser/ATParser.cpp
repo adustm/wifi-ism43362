@@ -37,9 +37,9 @@
 #define MIN(a,b) (((a)<(b))?(a):(b))
 
 // activate / de-activate debug
-#define dbg_on           0
-#define AT_DATA_PRINT    0
-#define AT_COMMAND_PRINT 0
+#define dbg_on           1
+#define AT_DATA_PRINT    1
+#define AT_COMMAND_PRINT 1
 #define AT_HEXA_DATA     0
 
 ATParser::ATParser(BufferedSpi &serial_spi, const char *delimiter, int buffer_size, int timeout) :
