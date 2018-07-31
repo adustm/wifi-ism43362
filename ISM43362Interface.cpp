@@ -437,6 +437,11 @@ int ISM43362Interface::socket_recv(void *handle, void *data, unsigned size)
             socket->connected = false;
             debug_if(_ism_debug, "ISM43362Interface socket_recv: socket closed\r\n");
             _mutex.unlock();
+            /* generate an event in case callback available */
+            if (_cbs[socket->id].callback != 0) {
+                printf("socke_recv event closed\n");
+                event();
+            }
             return NSAPI_ERROR_CONNECTION_LOST;
         }
     }
